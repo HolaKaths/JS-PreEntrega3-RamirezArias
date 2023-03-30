@@ -101,10 +101,6 @@ function addNewRow() {
 }
 
 
-function calcularTabla() {
-
-}
-
 function leerTabla() {
     const valoresTabla = document.querySelectorAll("#imcData tr");
     let listaObjetosIMC = [];
@@ -135,36 +131,51 @@ function calcularIMCTabla(listaObjetosIMC) {
 
 // Gráfico de barras
 
-const data = {
-    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
-    datasets: [
-        {
-            label: 'IMC',
-            backgroundColor: '#22577A',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(54, 162, 235, 0.4)',
-            hoverBorderColor: 'rgba(54, 162, 235, 1)',
-            data: [20, 80, 81, 56, 55, 40],
-        },
-    ],
-};
+// --Colecciones de datos
 
-const options = {
-    scales: {
-        yAxes: [
-            {
-                ticks: {
-                    beginAtZero: true,
-                },
-            },
-        ],
+
+var edades = [1,2,3,4,5,6,7,8,9,10
+    
+]
+
+var imc = [
+44.44444444444446,
+34.99999999999994,
+49.9999999999999,
+48.1632653061225,
+38.0718336483932,
+50.24556
+];
+
+
+
+const myChart = new Chart(document.getElementById("myChart"), {
+type: "line",
+data: {
+labels: edades,
+datasets: [
+  {
+    label: "IMC",
+    data: imc,
+    backgroundColor: "rgba(153, 205, 1, 0.6)",
+  },
+],
+},
+options: {
+scales: {
+  x: {
+    title: {
+      display: true,
+      text: "Edad",
     },
-};
-
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-  type: 'bar',
-  data: data,
-  options: options,
+  },
+  y: {
+    title: {
+      display: true,
+      text: "IMC",
+    },
+  },
+},
+},
 });
+// Gráfico de barras

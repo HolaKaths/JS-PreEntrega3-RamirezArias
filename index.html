@@ -134,17 +134,21 @@
         <div id="resultado" class="resultado"></div>
     </div>
 
+    <br>
+    <br>
+
     <div class="contenedor2">
         <title>Calculadora IMC para perros</title>
 
 
-        <h1>Calculadora IMC para perros</h1>
+        <h1 class="titulo">Calculadora IMC para perros</h1>
         <p>
             Para calcular el índice de masa corporal (IMC) de tu perro, introduce su peso en kilogramos y su altura en
             centímetros:
         </p>
         <div style="overflow-x:auto;">
 
+            <br>
 
 
             <!-- calculadora de IMC -->
@@ -183,21 +187,26 @@
 
                 <input type="button" class="boton2" value="Calcular" form="formularioIMC" onclick="leerTabla()">
 
-                <input type="button" class="boton2" value="Guardar">
 
             </form>
 
             <script src="calcularIMC.js"></script>
-
             <!-- fin calculadora -->
 
-            <br><br>
+            <br>
+            <br>
 
             <!-- gráfico de barras -->
+            <div class="contenedor3">
 
+                <h1 class="titulo">Historial del IMC de tu perro </h1>
+                <p>
+                    Aquí podrás ver el seguimiento mes a mes del IMC de tu peludito:
+                </p>
 
-            <canvas id="myChart"></canvas>
-            <br>
+                <canvas id="myChart"></canvas>
+                <br>
+            </div>
         </div>
     </div>
 
