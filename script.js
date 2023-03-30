@@ -134,17 +134,17 @@ function calcularIMCTabla(listaObjetosIMC) {
 // --Colecciones de datos
 
 
-var edades = [1,2,3,4,5,6,7,8,9,10
+let edad = [1,2,3,4,5,6,7,8,9,10
     
 ]
 
-var imc = [
-44.44444444444446,
-34.99999999999994,
-49.9999999999999,
-48.1632653061225,
-38.0718336483932,
-50.24556
+let imc = [
+444.44444444444446,
+374.99999999999994,
+449.9999999999999,
+408.1632653061225,
+378.0718336483932,
+500.24556
 ];
 
 
@@ -152,7 +152,7 @@ var imc = [
 const myChart = new Chart(document.getElementById("myChart"), {
 type: "line",
 data: {
-labels: edades,
+labels: edad,
 datasets: [
   {
     label: "IMC",
