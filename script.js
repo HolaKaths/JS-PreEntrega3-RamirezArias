@@ -136,16 +136,16 @@ function calcularIMCTabla(listaObjetosIMC) {
 // Gráfico de barras
 
 const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
     datasets: [
         {
-            label: 'Sales',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            label: 'IMC',
+            backgroundColor: '#22577A',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(54, 162, 235, 0.4)',
             hoverBorderColor: 'rgba(54, 162, 235, 1)',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data: [20, 80, 81, 56, 55, 40],
         },
     ],
 };
@@ -161,7 +161,6 @@ const options = {
         ],
     },
 };
-
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
