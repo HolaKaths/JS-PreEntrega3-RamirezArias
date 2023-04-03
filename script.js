@@ -36,17 +36,16 @@ function calcularEdadMascotas() {
         i++;
     }
 }
-
 function calcularIMC() {
     // Obtener los valores de peso y altura
     const peso = document.getElementById('peso').value;
     const altura = document.getElementById('altura').value;
     // Calcular el IMC
-    const imc = peso / ((altura / 100) ** 2);
+    const imc = (peso / ((altura / 100) ** 2)).toFixed(2);
 
     // Mostrar el resultado en la página
     const resultado = document.getElementById('resultado2');
-    resultado.textContent = imc.toFixed(1);
+    resultado.textContent = imc;
 
     // Evaluar el resultado del IMC
     resultado.textContent += imc < 18.5 ? " - Bajo peso"
@@ -56,6 +55,7 @@ function calcularIMC() {
                     : imc >= 35 && imc < 40 ? " - Obesidad grado 2"
                         : " - Obesidad grado 3";
 }
+
 
 function addNewRow() {
     let table = document.getElementById("imcData");
@@ -121,61 +121,64 @@ function leerTabla() {
 }
 
 function calcularIMCTabla(listaObjetosIMC) {
+    const DECIMALES_IMC = 2;
     for (let index = 0; index < listaObjetosIMC.length; index++) {
         let aux = listaObjetosIMC[index];
-        aux.imc = aux.peso / ((aux.altura / 100) ** 2);
+        aux.imc = (aux.peso / ((aux.altura / 100) ** 2)).toFixed(DECIMALES_IMC);
         listaObjetosIMC[index] = aux;
     }
-    return listaObjetosIMC
+    return listaObjetosIMC;
 }
+
 
 // Gráfico de barras
 
 // --Colecciones de datos
 
+const edades = [1, 2, 3, 4, 5, 6, 7, 8
 
-let edad = [1,2,3,4,5,6,7,8,9,10
-    
 ]
 
-let imc = [
-444.44444444444446,
-374.99999999999994,
-449.9999999999999,
-408.1632653061225,
-378.0718336483932,
-500.24556
+const imc = [
+    444.44444444444446,
+    374.99999999999994,
+    449.9999999999999,
+    408.1632653061225,
+    378.0718336483932,
+    500.24556
 ];
 
 
 
-const myChart = new Chart(document.getElementById("myChart"), {
-type: "line",
-data: {
-labels: edad,
-datasets: [
-  {
-    label: "IMC",
-    data: imc,
-    backgroundColor: "rgba(153, 205, 1, 0.6)",
-  },
-],
-},
-options: {
-scales: {
-  x: {
-    title: {
-      display: true,
-      text: "Edad",
-    },
-  },
-  y: {
-    title: {
-      display: true,
-      text: "IMC",
-    },
-  },
-},
-},
-});
-// Gráfico de barras
+const myChart = new Chart(document.getElementById("myChart"),
+    {
+        type: "line",
+        data: {
+            labels: edades,
+            datasets: [
+                {
+                    label: "IMC",
+                    data: imc,
+                    backgroundColor: "rgba(153, 205, 1, 0.6)",
+                    showLine: true,
+                    spanGaps: true,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: "Edad",
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: "IMC",
+                    },
+                },
+            },
+        },
+    });

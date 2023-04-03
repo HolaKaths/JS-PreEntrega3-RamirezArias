@@ -214,7 +214,7 @@ input.altura {
 
 }
 
-/* que no se vea esas flechas en el campo de numero */
+/* ocultar flechas en el campo de numero */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
