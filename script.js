@@ -27,17 +27,52 @@ function calcularEdad() {
 
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = `La edad de tu ${animal} ${nombre} en años humanos es ${edadHumana} y su peso ideal estimado a esa edad sería ${peso} kg.`;
+
+    // Guardar en localStorage
+    const mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
+    mascotas.push({ animal, nombre, edadHumana, peso });
+    localStorage.setItem("mascotas", JSON.stringify(mascotas));
 }
 
-function calcularEdadMascotas() {
-    const numMascotas = parseInt(prompt("Ingresa el número de mascotas a calcular:"));
-    let i = 0;
+function mostrarResultados() {
+    // Llamar los datos de localStorage
+    const mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
 
-    while (i < numMascotas) {
-        calcularEdad();
-        i++;
-    }
+    // Mostrar resultados en tabla
+    const tabla = document.getElementById("tablaResultados");
+    tabla.innerHTML = `
+        <thead>
+            <tr>
+                <th>Animal</th>
+                <th>Nombre</th>
+                <th>Edad humana</th>
+                <th>Peso estimado</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+    mascotas.forEach(mascota => {
+        tabla.innerHTML += `
+            <tr>
+                <td>${mascota.animal}</td>
+                <td>${mascota.nombre}</td>
+                <td>${mascota.edadHumana}</td>
+                <td>${mascota.peso}</td>
+            </tr>
+        `;
+    });
+    tabla.innerHTML += "</tbody>";
 }
+
+function borrarResultados() {
+    // Borrar datos de localStorage
+    localStorage.removeItem("mascotas");
+
+    // Limpiar/borrar tabla
+    const tabla = document.getElementById("tablaResultados");
+    tabla.innerHTML = "";
+}
+
 
 function calcularIMC() {
     // Obtener los valores de peso y altura
@@ -106,6 +141,7 @@ function addNewRow() {
 function leerTabla() {
     const valoresTabla = document.querySelectorAll("#imcData tr");
     let listaObjetosIMC = [];
+    let index2 = 0;
 
     for (let index = 1; index < valoresTabla.length; index++) {
         let edad = valoresTabla[index].querySelector("input[name='edad']").value;
