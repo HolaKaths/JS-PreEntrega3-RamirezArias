@@ -99,73 +99,76 @@ function addNewRow() {
     cell3.appendChild(nuevaAltura);
     cell4.innerHTML = "";
 }
+
 function leerTabla() {
     const valoresTabla = document.querySelectorAll("#imcData tr");
     let listaObjetosIMC = [];
     for (let index = 1; index < valoresTabla.length; index++) {
-      let edad = valoresTabla[index].querySelector("input[name='edad']").value;
-      let peso = valoresTabla[index].querySelector("input[name='peso']").value;
-      let altura = valoresTabla[index].querySelector("input[name='altura']").value;
-      let imc = 0;
-      listaObjetosIMC[index - 1] = { edad, peso, altura, imc };
+        let edad = valoresTabla[index].querySelector("input[name='edad']").value;
+        let peso = valoresTabla[index].querySelector("input[name='peso']").value;
+        let altura = valoresTabla[index].querySelector("input[name='altura']").value;
+        let imc = 0;
+        listaObjetosIMC[index - 1] = { edad, peso, altura, imc };
     }
     listaObjetosIMC = calcularIMCTabla(listaObjetosIMC);
-  
+
     for (let index = 1; index < valoresTabla.length; index++) {
-      valoresTabla[index].lastElementChild.innerHTML = listaObjetosIMC[index - 1].imc;
+        valoresTabla[index].lastElementChild.innerHTML = listaObjetosIMC[index - 1].imc;
     }
-  
+
     crearGrafico(listaObjetosIMC);
-  }
-  
-  function calcularIMCTabla(listaObjetosIMC) {
-    const DECIMALES_IMC = 2;
+}
+
+function calcularIMCTabla(listaObjetosIMC) {
+    const decimales_IMC = 2;
     for (let index = 0; index < listaObjetosIMC.length; index++) {
-      let aux = listaObjetosIMC[index];
-      aux.imc = (aux.peso / ((aux.altura / 100) ** 2)).toFixed(DECIMALES_IMC);
-      listaObjetosIMC[index] = aux;
+        let aux = listaObjetosIMC[index];
+        aux.imc = (aux.peso / ((aux.altura / 100) ** 2)).toFixed(decimales_IMC);
+        listaObjetosIMC[index] = aux;
     }
     return listaObjetosIMC;
-  }
-  
-  function crearGrafico(listaObjetosIMC) {
+}
+
+function crearGrafico(listaObjetosIMC) {
     const edades = listaObjetosIMC.map((obj) => obj.edad);
     const imcs = listaObjetosIMC.map((obj) => obj.imc);
-  
+
     const ctx = document.getElementById("myChart").getContext("2d");
+
   
+
     const myChart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: edades,
-        datasets: [
-          {
-            label: "IMC",
-            data: imcs,
-            backgroundColor: "rgba(153, 205, 1, 0.6)",
-            borderColor: "rgba(153, 205, 1, 1)",
-            borderWidth: 2,
-            fill: true,
-            lineTension: 0.2,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Edad",
-            },
-          },
-          y: {
-            title: {
-              display: true,
-              text: "IMC",
-            },
-          },
+        type: "line",
+        data: {
+            labels: edades,
+            datasets: [
+                {
+                    label: "IMC",
+                    data: imcs,
+                    backgroundColor: "rgba(153, 205, 1, 0.6)",
+                    borderColor: "rgba(153, 205, 1, 1)",
+                    borderWidth: 2,
+                    fill: true,
+                    lineTension: 0.2,
+                },
+            ],
         },
-      },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: "Edad",
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: "IMC",
+                    },
+                },
+            },
+        },
     });
-  }
-  
+}
+
