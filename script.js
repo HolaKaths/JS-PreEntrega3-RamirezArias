@@ -1,3 +1,5 @@
+let myChart;
+
 function calcularEdad() {
     const animal = document.getElementById("animal").value;
     const nombre = document.getElementById("nombre").value;
@@ -36,6 +38,7 @@ function calcularEdadMascotas() {
         i++;
     }
 }
+
 function calcularIMC() {
     // Obtener los valores de peso y altura
     const peso = document.getElementById('peso').value;
@@ -103,6 +106,7 @@ function addNewRow() {
 function leerTabla() {
     const valoresTabla = document.querySelectorAll("#imcData tr");
     let listaObjetosIMC = [];
+
     for (let index = 1; index < valoresTabla.length; index++) {
         let edad = valoresTabla[index].querySelector("input[name='edad']").value;
         let peso = valoresTabla[index].querySelector("input[name='peso']").value;
@@ -111,11 +115,14 @@ function leerTabla() {
         listaObjetosIMC[index - 1] = { edad, peso, altura, imc };
     }
     listaObjetosIMC = calcularIMCTabla(listaObjetosIMC);
-
+    
     for (let index = 1; index < valoresTabla.length; index++) {
         valoresTabla[index].lastElementChild.innerHTML = listaObjetosIMC[index - 1].imc;
     }
 
+    if (myChart) {
+        myChart.destroy();
+    }
     crearGrafico(listaObjetosIMC);
 }
 
@@ -130,14 +137,13 @@ function calcularIMCTabla(listaObjetosIMC) {
 }
 
 function crearGrafico(listaObjetosIMC) {
+    
     const edades = listaObjetosIMC.map((obj) => obj.edad);
     const imcs = listaObjetosIMC.map((obj) => obj.imc);
 
-    const ctx = document.getElementById("myChart").getContext("2d");
+    const ctx = document.getElementById("imcChart").getContext("2d");
 
-  
-
-    const myChart = new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: "line",
         data: {
             labels: edades,
