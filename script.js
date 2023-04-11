@@ -138,6 +138,7 @@ function addNewRow() {
     cell4.innerHTML = "";
 }
 
+// Llamar los datos de la tabla
 function leerTabla() {
     const valoresTabla = document.querySelectorAll("#imcData tr");
     let listaObjetosIMC = [];
@@ -151,13 +152,16 @@ function leerTabla() {
         listaObjetosIMC[index - 1] = { edad, peso, altura, imc };
     }
     listaObjetosIMC = calcularIMCTabla(listaObjetosIMC);
-    
+
     for (let index = 1; index < valoresTabla.length; index++) {
         valoresTabla[index].lastElementChild.innerHTML = listaObjetosIMC[index - 1].imc;
     }
 
-    // Almacenar los datos en localStorage como JSON
-    localStorage.setItem("listaObjetosIMC", JSON.stringify(listaObjetosIMC));
+    // Lista de objetos en cadena JSON
+    const listaObjetosIMCJson = JSON.stringify(listaObjetosIMC);
+
+    // Guardar la cadena JSON en el localStorage
+    localStorage.setItem('listaObjetosIMC', listaObjetosIMCJson);
 
     if (myChart) {
         myChart.destroy();
@@ -176,11 +180,13 @@ function calcularIMCTabla(listaObjetosIMC) {
 }
 
 function crearGrafico(listaObjetosIMC) {
+
     const edades = listaObjetosIMC.map((obj) => obj.edad);
     const imcs = listaObjetosIMC.map((obj) => obj.imc);
 
     const ctx = document.getElementById("imcChart").getContext("2d");
 
+    //Crear gráfico lineal con Edad + IMC
     myChart = new Chart(ctx, {
         type: "line",
         data: {
