@@ -156,6 +156,9 @@ function leerTabla() {
         valoresTabla[index].lastElementChild.innerHTML = listaObjetosIMC[index - 1].imc;
     }
 
+    // Almacenar los datos en localStorage como JSON
+    localStorage.setItem("listaObjetosIMC", JSON.stringify(listaObjetosIMC));
+
     if (myChart) {
         myChart.destroy();
     }
@@ -173,7 +176,6 @@ function calcularIMCTabla(listaObjetosIMC) {
 }
 
 function crearGrafico(listaObjetosIMC) {
-    
     const edades = listaObjetosIMC.map((obj) => obj.edad);
     const imcs = listaObjetosIMC.map((obj) => obj.imc);
 
@@ -213,4 +215,3 @@ function crearGrafico(listaObjetosIMC) {
         },
     });
 }
-
